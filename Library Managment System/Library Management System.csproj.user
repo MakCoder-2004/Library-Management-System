@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="AddBookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AllBooksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="BookDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="BorrowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="BorrowingHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="BuyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="BuyingHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmAddMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmAddStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmBooks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmLibraryFlow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmMembers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmSearchMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmSearchStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmViewMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmViewStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ReturnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
