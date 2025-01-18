@@ -25,7 +25,7 @@ The database for the Library Management System is designed using **SQL Server**.
 
 ### Relational Schema
 
-![Relational Schema](Relational_Schema.png)
+![Relational Schema](images/Relational_Schema.png)
 
 ---
 
