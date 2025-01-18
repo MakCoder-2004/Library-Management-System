@@ -202,6 +202,108 @@ The database includes several stored procedures to automate common tasks:
 9. **SP_delMember**: Deletes a member.
 
 ---
+## Constraints in the Project
+
+Constraints are essential for maintaining data integrity and ensuring that the database operates correctly. Below are the key constraints used in the **Library Management System**:
+
+---
+
+### 1. **Primary Key Constraints**
+   - Every table has a primary key (`id` or similar) to uniquely identify each record.
+   - Examples:
+     - `Books(id)`
+     - `Members(id)`
+     - `Borrow(BorrowId)`
+   - Ensures no duplicate records exist in the table.
+
+---
+
+### 2. **Foreign Key Constraints**
+   - Foreign keys are used to establish relationships between tables.
+   - Examples:
+     - `Borrow(MemberId)` references `Members(id)`.
+     - `Borrow(BookId)` references `Books(id)`.
+     - `Returning(StaffId)` references `Staff(id)`.
+   - Ensures that related records exist in the referenced tables.
+
+---
+
+### 3. **Unique Constraints**
+   - Certain fields must be unique to avoid duplication.
+   - Examples:
+     - `Books(ISBN)`: Ensures no two books have the same ISBN.
+     - `Members(SSN)`: Ensures no two members have the same Social Security Number.
+     - `User_Pass(Username)`: Ensures no duplicate usernames for login.
+
+---
+
+### 4. **Check Constraints**
+   - Ensures that data meets specific conditions before being inserted or updated.
+   - Examples:
+     - `Books(Amount)`: Must be a non-negative integer (ensures no negative copies).
+     - `Fines(FineAmount)`: Must be a non-negative value (ensures no negative fines).
+     - `Borrow(DueDate)`: Must be greater than or equal to `BorrowDate`.
+
+---
+
+### 5. **Not Null Constraints**
+   - Ensures that certain fields cannot be left empty.
+   - Examples:
+     - `Books(Name)`: A book must have a title.
+     - `Members(Name)`: A member must have a name.
+     - `Borrow(BorrowDate)`: A borrowing record must have a borrow date.
+
+---
+
+## Borrowing and Returning Logic
+
+The system handles **borrowing** and **returning** of books through the `Borrow` and `Returning` tables, with additional logic to enforce rules and constraints.
+
+---
+
+### Borrowing a Book
+
+1. **Steps**:
+   - A member requests to borrow a book.
+   - The system checks:
+     - If the member’s `BorrowState` is `1` (allowed to borrow).
+     - If the book’s `Amount` is greater than `0` (copies available).
+   - If both conditions are met:
+     - A new record is created in the `Borrow` table with:
+       - `MemberId`: The member borrowing the book.
+       - `BookId`: The book being borrowed.
+       - `BorrowDate`: The current date.
+       - `DueDate`: Calculated based on library policies (e.g., 14 days from `BorrowDate`).
+     - The `Amount` of the book in the `Books` table is decremented by `1`.
+
+2. **Constraints**:
+   - A member cannot borrow more books than the allowed limit (enforced by application logic).
+   - A book cannot be borrowed if `Amount` is `0`.
+
+---
+
+### Returning a Book
+
+1. **Steps**:
+   - A member returns a book.
+   - The system checks:
+     - If the `ReturnDate` is greater than or equal to the `BorrowDate`.
+     - If the book was borrowed by the same member (via `BorrowId`).
+   - If the book is returned late:
+     - A fine is calculated based on the number of days overdue.
+     - A new record is created in the `Fines` table with:
+       - `MemberId`: The member returning the book.
+       - `BookId`: The book being returned.
+       - `FineAmount`: The calculated fine.
+       - `FineType`: Set to "Overdue".
+       - `ReturnDate`: The current date.
+   - The `Amount` of the book in the `Books` table is incremented by `1`.
+
+2. **Constraints**:
+   - The `ReturnDate` must be greater than or equal to the `BorrowDate`.
+   - A book cannot be returned if it was not borrowed (enforced by foreign key constraints).
+
+---
 
 ## How to Use
 
